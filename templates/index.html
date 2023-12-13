@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <title>Recognize Digit</title>
+</head>
+<body>
+    <div class="top">
+        <div class="heading">
+            <img src="../static/css/bot.svg" alt="icon">
+            <p>Hi! I am InkPal</p>
+            <h1>I DIGITIZE YOUR HANDWRITING</h1>
+        </div>
+    </div>
+   
+    <div class = "inputButton">
+        <form action="/" method="post" enctype="multipart/form-data">
+            <!-- Hidden file input -->
+            <input type="file" id="fileInput" name="img_file" accept=".png, .jpg, .jpeg, .gif" required style="display: none;">
+        
+            <!-- Custom-styled label as the button -->
+            <label for="fileInput" style="border: 1px solid #ccc; padding: 10px; cursor: pointer; display: inline-block; border-radius: 5px">
+                Upload Image
+            </label>
+        
+            <!-- Additional information for users -->
+            <p>Upload an image of your handwritten text <br>Make sure the file has extension .jpeg,.jpg, .png only! </p>
+            <br>
+            <!-- Submit button (you can customize this as needed) -->
+            <button type="submit">DIGITIZE</button>
+        </form>
+    </div>
+
+    <!-- Add this block inside the <body> tag, below the form -->
+    {% if uploaded_image %}
+        <div class="uploaded-image">
+            <p>Uploaded Image:</p>
+            <img src="{{ url_for('uploaded_file', filename=uploaded_image) }}" alt="Uploaded Image">
+        </div>
+    {% endif %}
+
+    
+
+    {% if prediction %}
+        <p style="font-size: 20px;">{{ prediction }}</p>
+        <p style="font-size: 20px;">{{ confidence }}</p>
+        
+    {% endif %}
+
+
+</body>
+</html>
